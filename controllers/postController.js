@@ -1,15 +1,20 @@
-// IMPORTIAMO L'ARRAY PRESENTE IN DATA
-const posts = require('../data/posts.js');
-// const { post } = require('../routers/posts.js');
+// IMPORTIAMO FILE CONNESSIONE AL DB
+const connection = require('../data/db');
 
 
 // FUNZIONE PER LE ROTTE
 
 // INDEX
 function index(req, res) {
-    // ERRORE PER TESTARE MIDDLEWARES SERVER
-    // dgerghtgrwfge;
-    res.json(posts);
+
+    // preparo la query
+    const sql = 'SELECT * FROM posts';
+
+    // eseguo la query
+    connection.query(sql, (err, results) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+        res.json(results);
+    });
 }
 // SHOW
 function show(req, res) {
