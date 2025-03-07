@@ -1,0 +1,26 @@
+{
+  "name": "express-blog-sql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node --watch app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luca-Belardinelli/express-blog-sql.git"
+  },
+  "author": "Luca Belardinelli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luca-Belardinelli/express-blog-sql/issues"
+  },
+  "homepage": "https://github.com/Luca-Belardinelli/express-blog-sql#readme",
+  "dependencies": {
+    "axios": "^1.8.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
