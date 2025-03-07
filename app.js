@@ -6,18 +6,11 @@ const app = express()
 const port = 3000
 // IMPORTIAMO IL ROUTER
 const postsRouter = require('./routers/posts')
-// IMPORTIAMO IL MIDDLEWARE NOTFOUND
-const notFound = require('./middlewares/notFound');
-// IMPORTIAMO IL MIDDLEWARE ERRORE SERVER
-const errorsHandler = require('./middlewares/errorsHandler');
+
 
 // importiamo il middleware di CORS
 var cors = require('cors')
 
-
-
-// DEFINIAMO USA DI UNA CARTELLA PER I FILE STATICI
-app.use(express.static('public'));
 
 // REGISTRO IL BODY-PARSER PER JSON
 app.use(express.json());
@@ -34,11 +27,6 @@ app.get('/', (req, res) => {
 // ROUTER
 app.use("/posts", postsRouter)
 
-// UTILIZZIAMO NOTFOUND
-app.use(notFound);
-
-// UTILIZZIAMO ERROR SERVER
-app.use(errorsHandler);
 
 // AVVIAMO IL SERVER METTENDELO IN ASCOLTO SULLA PORTA INDICATA
 app.listen(port, () => {
