@@ -40,25 +40,25 @@ function store(req, res) {
     // res.send("creazione nuovo post");
 
     // CREIAMO UN NUOVO ID INCREMENTANDO L'ULTIMO ID PRESENTE
-    const newId = posts[posts.length - 1].id + 1;
+    // const newId = posts[posts.length - 1].id + 1;
     // CREIAMO UN NUOVO OGGETTO 
-    const newPost = {
-        id: newId,
-        title: req.body.title,
-        content: req.body.content,
-        image: req.body.image,
-        tags: req.body.tags
-    }
+    // const newPost = {
+    //     id: newId,
+    //     title: req.body.title,
+    //     content: req.body.content,
+    //     image: req.body.image,
+    //     tags: req.body.tags
+    // }
 
     // AGGIUNGIAMO IL NUOVO POST ALL 'ARRAY
-    posts.push(newPost);
+    // posts.push(newPost);
 
     //CONTROLLO
-    console.log(posts);
+    // console.log(posts);
 
     // STATUS CORRETTO E POST CREATO
-    res.status(201);
-    res.json(newPost);
+    // res.status(201);
+    // res.json(newPost);
 
 }
 // UPDATE
@@ -127,26 +127,13 @@ function modify(req, res) {
 function destroy(req, res) {
     // RECUPERO ID E LO TRASFORMO IN NUMERO
     const id = parseInt(req.params.id)
-    // CHERCHIAMO IL POST TRAMITE ID
-    const post = posts.find(post => post.id === id);
-    // CONTROLLO 
-    if (!post) {
-        res.status(404);
 
-        return res.json({
-            status: 404,
-            error: "Not Found",
-            message: "Post non trovato"
-        })
-    }
-    // RIMUVIAMO IL POST DALLA LISTA
-    posts.splice(posts.indexOf(post), 1);
+    //ELIMINO IL POST                       
+    connection.query('DELETE FROM posts WHERE id = ?', [id], (err) => {
+        if (err) return res.status(500).json({ error: 'Failed to delete post' });
+        res.sendStatus(204)
+    });
 
-    // VERIFICA SUL TERMINALE
-    console.log(posts);
-
-    // RESTITUIAMO LO STATUS
-    res.sendStatus(204)
 }
 
 // esportiamo tutto
